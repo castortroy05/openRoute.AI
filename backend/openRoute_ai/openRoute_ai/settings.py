@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'openRoute_app',  # My app
     'rest_framework',  # Django REST framework
 ]
 
