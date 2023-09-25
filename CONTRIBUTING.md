@@ -61,8 +61,6 @@ At this point, you're waiting on us. We like to at least comment on pull request
 ### 11. Attribution
 
 This Contributing guide is adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/master/CONTRIBUTING.md)
-```
-
 ### Notes:
 - Replace `yourusername` with your actual GitHub username.
 - Adjust the links, project names, and details according to your project's specifics.
