@@ -232,4 +232,20 @@ class Optimization(models.Model):
         if self.minimize_travel_time and self.minimize_distance:
             raise ValidationError("Cannot minimize both travel time and distance simultaneously. Please choose one.")
 
+class Country(models.Model):
+    name = models.CharField(max_length=255)
+    iso2 = models.CharField(max_length=2)
+    iso3 = models.CharField(max_length=3)
+    flag = models.ImageField(upload_to='flags/', blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
 
+
+class City(models.Model):
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    city = models.CharField(max_length=255)
+    city_ascii = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.city
