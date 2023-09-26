@@ -12,19 +12,13 @@ const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav variant="pills" className="me-auto">
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/user" activeClassName="active">User</Nav.Link>
+              <Nav.Link as={NavLink} to="/user" activeclassname="active">User</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/place" activeClassName="active">Place</Nav.Link>
+              <Nav.Link as={NavLink} to="/place" activeclassname="active">Place</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/itinerary" activeClassName="active">Itinerary</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={NavLink} to="/register" activeClassName="active">Register</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link as={NavLink} to="/login" activeClassName="active">Login</Nav.Link>
+              <Nav.Link as={NavLink} to="/itinerary" activeclassname="active">Itinerary</Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

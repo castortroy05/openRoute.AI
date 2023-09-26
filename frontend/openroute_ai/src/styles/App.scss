@@ -71,22 +71,21 @@ body.dark-mode .navbar {
     color: #fff !important; // Dark mode color for Navbar links
   }
 }
-// // Define styles for the active link
-// .active {
-//   color: #007bff !important; // Color for the active link
-//   text-decoration: underline !important; // Underline the active link
-//   kerning: auto !important; // Reset kerning to default
-//   // border-radius: 20% !important; // Add border radius
-// }
+.register-container {
+  padding-top: 50px;
+}
 
-// // Define styles for the nav-pills
-// .nav-pills  {
-//   color: #007bff !important; // Color for the nav-pills links
-//   text-shadow: #333333;
-//   text-decoration: #333333;
-//   text-decoration: none !important; // Remove underline
-//   kerning: auto !important; // Reset kerning to default
-//   // border-radius: 20% !important; // Add border radius
-// }
+.register-button {
+  background-color: #007bff; // Your primary color
+  border: none;
+  margin-top: 20px; // Added padding above the button
+  &:hover {
+    background-color: #0056b3; // Your hover color
+  }
+}
+.mt-3 {
+  margin: 5px !important;
 
+  // padding: 30px;
+}
   
