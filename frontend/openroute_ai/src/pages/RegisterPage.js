@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
+import '../styles/App.scss';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ const RegisterPage = () => {
     email: '',
     password: '',
   });
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

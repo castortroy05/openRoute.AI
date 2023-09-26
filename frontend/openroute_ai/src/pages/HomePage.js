@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './styles/App.scss'; // Importing your styles
+import '../styles/App.scss'; // Importing your styles
 
 const HomePage = () => {
   return (

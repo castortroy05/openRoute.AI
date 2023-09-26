@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import '../styles/App.scss';
 
 function LoginPage() {
   const [username, setUsername] = useState('');

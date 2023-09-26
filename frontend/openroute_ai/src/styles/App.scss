@@ -5,4 +5,88 @@
     justify-content: center;
     text-align: center;
   }
+  .page-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .page-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .page-container p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  
+    // a,
+    // .btn-primary {
+    //   color: #946ac7;
+    // }
+  
+    .bg-white {
+      background-color: #121212 !important;
+    }
+  
+    .navbar,
+    .card {
+      background-color: #1f1f1f;
+    }
+  
+    .card {
+      border: 1px solid #333;
+    }
+  }
+  #dark-mode-switch {
+    .custom-control-label::before {
+      background-color: #e9ecef;
+    }
+  
+    .custom-control-input:checked~.custom-control-label::before {
+      background-color: #343a40;
+    }
+  }
+  // Define styles for light mode
+.navbar {
+  background-color: #f8f9fa !important; // Light mode background color for Navbar
+  
+  .nav-link, .navbar-brand {
+    color: #000 !important; // Light mode color for Navbar links
+  }
+}
+
+// Define styles for dark mode
+body.dark-mode .navbar {
+  background-color: #333333 !important; // Dark mode background color for Navbar
+  
+  .nav-link, .navbar-brand {
+    color: #fff !important; // Dark mode color for Navbar links
+  }
+}
+// // Define styles for the active link
+// .active {
+//   color: #007bff !important; // Color for the active link
+//   text-decoration: underline !important; // Underline the active link
+//   kerning: auto !important; // Reset kerning to default
+//   // border-radius: 20% !important; // Add border radius
+// }
+
+// // Define styles for the nav-pills
+// .nav-pills  {
+//   color: #007bff !important; // Color for the nav-pills links
+//   text-shadow: #333333;
+//   text-decoration: #333333;
+//   text-decoration: none !important; // Remove underline
+//   kerning: auto !important; // Reset kerning to default
+//   // border-radius: 20% !important; // Add border radius
+// }
+
   
