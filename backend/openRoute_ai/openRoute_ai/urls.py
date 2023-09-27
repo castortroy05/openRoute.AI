@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.urls import path, include
 from openRoute_app.views import get_flags
 from openRoute_app.views import (CustomUserViewSet, PlaceViewSet, ItineraryViewSet,
-                    ItineraryPlaceViewSet, OptimizationViewSet, RegisterView)
+                    ItineraryPlaceViewSet, OptimizationViewSet, RegisterView, CountryViewSet, CityViewSet)
 
 router = DefaultRouter()
 router.register(r'users', CustomUserViewSet)
@@ -13,13 +13,12 @@ router.register(r'places', PlaceViewSet)
 router.register(r'itineraries', ItineraryViewSet)
 router.register(r'itinerary-places', ItineraryPlaceViewSet)
 router.register(r'optimizations', OptimizationViewSet)
+router.register(r'countries', CountryViewSet)
+router.register(r'cities', CityViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api/flags/', get_flags, name='get_flags'),
     path('register/', RegisterView.as_view(), name='register'),
+    path("__debug__/", include("debug_toolbar.urls")),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 

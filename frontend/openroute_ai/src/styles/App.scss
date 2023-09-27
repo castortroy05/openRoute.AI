@@ -89,3 +89,44 @@ body.dark-mode .navbar {
   // padding: 30px;
 }
   
+  // Define styles for light mode
+  .modal-content{
+    background-color: #f8f9fa !important; // Light mode background color for modal-content
+ 
+  }
+  
+  // Define styles for dark mode
+  body.dark-mode .modal-content {
+    background-color: #333333 !important; // Dark mode background color for modal-content
+   
+    
+  }
+
+  .form-control {
+    background-color: #f8f9fa !important; // Light mode background color for form-control
+    color: #000 !important; // Light mode color 
+  }
+  body.dark-mode .form-control {
+    background-color: #333333 !important; // Dark mode background color for form-control
+    color: #fff !important; // Dark mode color 
+    
+    
+  }
+  .form-control:focus {
+    background-color: #f8f9fa !important; // Light mode background color for form-control
+    color: #000 !important; // Light mode color 
+  }
+  body.dark-mode .form-control:focus {
+    background-color: #333333 !important; // Dark mode background color for form-control
+    color: #fff !important; // Dark mode color 
+    
+    
+  }
+  .form-control::placeholder {
+    color: #000 !important; // Light mode color 
+  }
+  body.dark-mode .form-control::placeholder {
+    color: #fff !important; // Dark mode color 
+    
+    
+  }

@@ -7,7 +7,7 @@ const NavigationBar = () => {
   return (
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand as={NavLink} to="/">OpenRoute</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">G.W.A.P.A.</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav variant="pills" className="me-auto">

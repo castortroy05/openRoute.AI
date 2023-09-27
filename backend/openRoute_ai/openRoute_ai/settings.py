@@ -19,6 +19,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'flags')
 
+
+# Set CustomUser as the Default User Model
+AUTH_USER_MODEL = 'openRoute_app.CustomUser'
+
+# Django Rest Framework Settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -45,6 +62,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'openRoute_app',  # My app
     'rest_framework',  # Django REST framework
+    'rest_framework.authtoken',
+    'debug_toolbar',  # Django Debug Toolbar
 ]
 
 MIDDLEWARE = [
@@ -57,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'openRoute_ai.urls'
