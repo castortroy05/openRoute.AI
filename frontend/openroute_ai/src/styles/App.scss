@@ -3,14 +3,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: justify;
+    text-rendering: auto;
+    font-size: 1rem;
   }
   .page-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: justify;
+    font-size: 1rem;
   }
   
   .page-container h1 {
@@ -19,13 +22,14 @@
   }
   
   .page-container p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 20px;
   }
   
   .dark-mode {
     background-color: #121212;
     color: #ffffff;
+
   
     // a,
     // .btn-primary {
@@ -110,7 +114,6 @@ body.dark-mode .navbar {
     background-color: #333333 !important; // Dark mode background color for form-control
     color: #fff !important; // Dark mode color 
     
-    
   }
   .form-control:focus {
     background-color: #f8f9fa !important; // Light mode background color for form-control
@@ -128,5 +131,95 @@ body.dark-mode .navbar {
   body.dark-mode .form-control::placeholder {
     color: #fff !important; // Dark mode color 
     
+  }
+  .text-muted {
+    color: #6c757d !important; // Light mode color for .text-muted
+    font-size: small;
+  }
+  
+  // Define styles for dark mode
+  body.dark-mode .text-muted {
+    color: #b3b3b3 !important; // Dark mode color for .text-muted
+    font-size: small;
+  }
+  .list-group-item {
+    background-color: #f8f9fa !important; // Light mode background color for form-control
+    color: #000 !important; // Light mode color 
+  }
+  body.dark-mode .list-group-item {
+    background-color: #333333 !important; // Dark mode background color for form-control
+    color: #fff !important; // Dark mode color 
     
+  }
+  .navbar-custom {
+    background-color: #f8f9fa; // Adjust as needed
+    .navbar-brand {
+      color: #000 !important; // Adjust as needed
+      .badge {
+        background-color: #6c757d; // Adjust as needed
+      }
+    }
+    .nav-link {
+      color: #000 !important; // Adjust as needed
+      &:hover {
+        color: #272525 !important; // Adjust as needed
+        
+      }
+    }
+    .active {
+      color: #3b3636 !important; // Adjust as needed
+    }
+    
+  }
+  body.dark-mode .navbar-custom {
+    background-color: #333333; // Adjust as needed
+    .navbar-brand {
+      color: #fff !important; // Adjust as needed
+      .badge {
+        background-color: #b3b3b3; // Adjust as needed
+      }
+    }
+    .nav-link {
+      color: #fff !important; // Adjust as needed
+      &:hover {
+        color: #b3b3b3 !important; // Adjust as needed
+      }
+    }
+    .active {
+      color: #b3b3b3 !important; // Adjust as needed
+    }
+  }
+  .home-brand {
+    color: #000 !important; // Or any color that is visible in light mode on the home page
+  }
+  body.dark-mode .home-brand {
+    color: #fff !important; // Or any color that is visible in dark mode on the home page
+  }
+
+
+  .card {
+    background-color: #f8f9fa !important; // Light mode background color for .card
+    color: #000 !important; // Light mode color for .card
+    margin: auto;
+    text-align: justify;
+    border-radius: 15px; // Rounded edges
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Drop shadow for 3D look
+  }
+  body.dark-mode .card {
+    background-color: #333333 !important; // Dark mode background color for .card
+    color: #fff !important; // Dark mode color for .card
+    margin: auto;
+    border-radius: 15px; // Rounded edges
+    box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1); // Drop shadow for 3D look
+  }
+  // .card-text {
+  //   color: #000 !important; // Light mode color for .text-muted
+  //   font-size: small;
+  // }
+  // body.dark-mode .card-text {
+  //   color: #fff !important; // Dark mode color for .text-muted
+  //   font-size: small;
+  // }
+  .card-body {
+   padding: 5px;
   }
