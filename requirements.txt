@@ -19,7 +19,7 @@ pylint-django==2.5.3
 pylint-plugin-utils==0.8.2
 pytz==2023.3.post1
 requests==2.31.0
-sqlparse==0.4.4
+sqlparse==0.5.0
 tomlkit==0.12.1
 tzdata==2023.3
 urllib3==2.0.5
