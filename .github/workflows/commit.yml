@@ -2,7 +2,7 @@ name: Auto Commit
 
 on:
   schedule:
-    - cron: '*/60 * * * *'  # This schedule runs the action daily. Adjust the cron schedule as needed.
+    - cron: '*/30 * * * *'  # This schedule runs the action every 30 minutes.
 
 jobs:
   commit:
@@ -10,17 +10,22 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Make a commit
+    - name: Install dependencies
+      run: sudo apt-get install -y jq
+    - name: Make a meaningful commit
       run: |
-        echo "Last update: $(date)" > update.log
+        # Generate a random quote or dynamic content
+        QUOTE=$(curl -s https://api.quotable.io/random | jq -r .content)
+        echo "Quote of the moment: $QUOTE" >> update.log
+        echo "Last update: $(date)" >> update.log
         git config --global user.name 'castortroy05'
         git config --global user.email 'antony.lockhart@gmail.com'
         git add .
-        git commit -m "Automated update $(date)"
+        git commit -m "Automated update with a random quote: $(date)" || echo "No changes to commit"
     - name: Pull and Push changes
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git remote set-url origin https://castortroy05:${GH_TOKEN}@github.com/castortroy05/openRoute.AI.git
+        git remote set-url origin https://castortroy05:${{ secrets.GH_TOKEN }}@github.com/castortroy05/openRoute.AI.git
         git pull origin main --rebase
         git push origin main
