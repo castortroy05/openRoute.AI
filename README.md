@@ -35,9 +35,10 @@ OpenRoute.ai is a web application designed to provide optimized itineraries and 
 
 ### API Endpoints
 
-- User Registration: `<API_BASE_URL>/api/users/`
-- Place Management: `<API_BASE_URL>/api/places/`
-- Itinerary Management: `<API_BASE_URL>/api/itineraries/`
+- User Registration: `<API_BASE_URL>/register/`
+- User Management: `<API_BASE_URL>/users/`
+- Place Management: `<API_BASE_URL>/places/`
+- Itinerary Management: `<API_BASE_URL>/itineraries/`
 
 ## Frontend (React)
 
