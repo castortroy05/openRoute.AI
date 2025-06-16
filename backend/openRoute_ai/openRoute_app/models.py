@@ -61,7 +61,7 @@ class CustomUser(AbstractUser):
         related_name="customuser_user_permissions",
         related_query_name="customuser",
     )
-    objects = models.Manager()
+    objects = CustomUserManager()
 
 
 class Place(models.Model):
@@ -90,7 +90,7 @@ class Place(models.Model):
         ('T', 'Theatre'),
         ('C', 'Cinema'),
         ('Ba', 'Bar'),
-        ('C', 'Club'),
+        ('CL', 'Club'),
         ('G', 'Gallery'),
         ('L', 'Library'),
         ('Z', 'Zoo'),
