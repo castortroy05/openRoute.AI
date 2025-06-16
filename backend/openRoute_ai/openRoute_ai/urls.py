@@ -16,9 +16,10 @@ router.register(r'optimizations', OptimizationViewSet)
 router.register(r'countries', CountryViewSet)
 router.register(r'cities', CityViewSet)
 
+
 urlpatterns = [
     path('', include(router.urls)),
     path('register/', RegisterView.as_view(), name='register'),
     path("__debug__/", include("debug_toolbar.urls")),
 
-] 
+]
