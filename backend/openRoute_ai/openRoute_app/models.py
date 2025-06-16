@@ -88,7 +88,7 @@ class Place(models.Model):
         ('A', 'Attraction'),
         ('S', 'Shopping'),
         ('T', 'Theatre'),
-        ('C', 'Cinema'),
+        ('CI', 'Cinema'),
         ('Ba', 'Bar'),
         ('CL', 'Club'),
         ('G', 'Gallery'),
