@@ -15,7 +15,7 @@ OpenRoute.ai is a web application designed to provide optimized itineraries and 
    ```sh
    python -m venv venv
    .\venv\Scripts\activate  # For Windows
-   source venv/bin/activate  # For MacOS/Linux
+   source venv/bin/activate  # For macOS/Linux
    ```
 
 3. Install the required packages:
