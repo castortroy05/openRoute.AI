@@ -1,0 +1,150 @@
+/* Discreet Ad Styling - Minimal and non-intrusive */
+
+.discreet-ad {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  text-align: center;
+  position: relative;
+}
+
+.ad-label {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 9px;
+  color: #6c757d;
+  text-transform: uppercase;
+  padding: 2px 4px;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Sidebar placement */
+.ad-sidebar {
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+/* Footer placement */
+.ad-footer {
+  max-width: 728px;
+  margin: 30px auto;
+  padding: 15px;
+}
+
+/* In-content placement - blends with content */
+.ad-in-content {
+  margin: 30px 0;
+  background-color: transparent;
+  border: none;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+  padding: 20px 0;
+}
+
+.ad-in-content .ad-label {
+  top: 22px;
+}
+
+/* Ad blocker message */
+.ad-blocked {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 20px;
+  color: white;
+}
+
+.ad-message {
+  text-align: center;
+}
+
+.ad-message-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.ad-message-text {
+  font-size: 14px;
+  margin-bottom: 15px;
+  opacity: 0.95;
+  color: white;
+}
+
+.ad-upgrade-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: white;
+  color: #667eea;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.ad-upgrade-btn:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ad-sidebar {
+    max-width: 100%;
+  }
+
+  .ad-footer {
+    max-width: 100%;
+  }
+
+  .discreet-ad {
+    margin: 15px 0;
+    padding: 8px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .discreet-ad {
+    background-color: #2d3748;
+    border-color: #4a5568;
+  }
+
+  .ad-label {
+    background-color: #1a202c;
+    border-color: #4a5568;
+    color: #a0aec0;
+  }
+
+  .ad-in-content {
+    background-color: transparent;
+    border-color: #4a5568;
+  }
+}
+
+/* Make ads less intrusive with smooth transitions */
+.discreet-ad {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
