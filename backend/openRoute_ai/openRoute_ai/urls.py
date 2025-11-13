@@ -4,11 +4,23 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-from openRoute_app.views import get_flags
-from openRoute_app.views import (CustomUserViewSet, PlaceViewSet, ItineraryViewSet,
-                    ItineraryPlaceViewSet, OptimizationViewSet, RegisterView, CountryViewSet, CityViewSet)
+
+# Main app views
+from openRoute_app.views import (
+    CustomUserViewSet, PlaceViewSet, ItineraryViewSet,
+    ItineraryPlaceViewSet, OptimizationViewSet, RegisterView,
+    CountryViewSet, CityViewSet, get_flags
+)
+
+# Paywall views
+from openRoute_app.paywall_views import (
+    SubscriptionTierViewSet, UserSubscriptionViewSet,
+    UsageTrackingViewSet, PaymentHistoryViewSet, FeatureFlagViewSet
+)
 
 router = DefaultRouter()
+
+# Main API routes
 router.register(r'users', CustomUserViewSet)
 router.register(r'places', PlaceViewSet)
 router.register(r'itineraries', ItineraryViewSet)
@@ -16,6 +28,13 @@ router.register(r'itinerary-places', ItineraryPlaceViewSet)
 router.register(r'optimizations', OptimizationViewSet)
 router.register(r'countries', CountryViewSet)
 router.register(r'cities', CityViewSet)
+
+# Paywall/Subscription routes
+router.register(r'subscription-tiers', SubscriptionTierViewSet, basename='subscription-tier')
+router.register(r'subscriptions', UserSubscriptionViewSet, basename='user-subscription')
+router.register(r'usage', UsageTrackingViewSet, basename='usage-tracking')
+router.register(r'payments', PaymentHistoryViewSet, basename='payment-history')
+router.register(r'feature-flags', FeatureFlagViewSet, basename='feature-flag')
 
 
 urlpatterns = [

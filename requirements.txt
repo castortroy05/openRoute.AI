@@ -1,45 +1,60 @@
-# Core Django
+# Core Django - Bleeding Edge
 Django==5.1.3
 djangorestframework==3.15.2
 python-decouple==3.8
 
-# Database
+# Database - Latest
 psycopg2-binary==2.9.10
 
-# CORS and Authentication
+# CORS and Authentication - Latest
 django-cors-headers==4.6.0
 djangorestframework-simplejwt==5.3.1
 
-# API Documentation
+# API Documentation - Latest
 drf-spectacular==0.27.2
 
-# Image Processing
+# Image Processing - Latest (Security patched)
 Pillow==11.0.0
 
-# Utilities
+# Utilities - Latest
 pytz==2024.2
-python-dateutil==2.9.0
+python-dateutil==2.9.0.post0
 
-# Development Tools
+# Development Tools - Latest
 django-debug-toolbar==4.4.6
 django-extensions==3.2.3
 
-# Code Quality
+# Code Quality - Latest
 pylint==3.3.1
 pylint-django==2.5.5
 isort==5.13.2
 black==24.10.0
 
-# Testing
+# Testing - Latest
 pytest==8.3.3
 pytest-django==4.9.0
 pytest-cov==6.0.0
 factory-boy==3.3.1
 faker==30.8.2
 
-# Security
+# Security - Latest
 django-ratelimit==4.1.0
 django-environ==0.11.2
+cryptography==44.0.0
 
-# Async Support
+# Async Support - Latest
 asgiref==3.8.1
+
+# Payment Processing for Paywall
+stripe==11.2.0
+
+# Caching and Performance
+django-redis==5.4.0
+redis==5.2.0
+
+# Monitoring and Analytics
+django-prometheus==2.3.1
+
+# Additional Security Packages
+django-csp==3.8
+django-security==0.18.0
