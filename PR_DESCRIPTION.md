@@ -76,6 +76,56 @@ This PR implements a comprehensive upgrade of the OpenRoute.AI application stack
 
 ## 🎯 New Features
 
+### 💳 Paywall & Subscription System (Toggleable)
+- ✅ Complete Stripe integration for payment processing
+- ✅ Toggleable via `PAYWALL_ENABLED` environment variable (default: False)
+- ✅ Usage tracking with daily limits and route quotas
+- ✅ Feature flag system for granular access control
+- ✅ RESTful API for subscription management
+- ✅ Payment history and webhook support
+
+### 🏅 Medal-Themed Subscription Tiers
+**5 tiers designed to encourage usage and upgrades:**
+
+1. **🥉 Bronze Explorer** (FREE)
+   - 5 saved routes
+   - 10 uses per day
+   - Basic AI models
+   - Ads every 2 requests
+
+2. **🥈 Silver Pathfinder** ($9.99/month) ⭐ MOST POPULAR
+   - 25 saved routes
+   - 50 uses per day
+   - Standard AI models
+   - Ads every 5 requests
+
+3. **🥇 Gold Navigator** ($24.99/month)
+   - 100 saved routes
+   - 150 uses per day
+   - Advanced AI models
+   - Ads every 10 requests
+
+4. **💎 Platinum Voyager** ($49.99/month)
+   - Unlimited saved routes
+   - Unlimited daily uses
+   - All AI models
+   - **NO ADS**
+
+5. **💠 Diamond Elite** ($499.99 lifetime)
+   - Unlimited saved routes
+   - Unlimited daily uses
+   - All AI models
+   - **NO ADS**
+   - Lifetime access
+
+### 📢 Discreet Ad Integration
+- ✅ Google AdSense integration for lower tiers
+- ✅ Non-intrusive, minimal ad placement
+- ✅ Ad blocker detection with upgrade messaging
+- ✅ Responsive ad units
+- ✅ Premium tiers (Platinum/Diamond) are completely ad-free
+- ✅ Ad frequency decreases with tier level
+
 ### API Enhancements
 - User-specific endpoints:
   - `GET /api/places/my_places/` - Get places created by authenticated user
@@ -86,14 +136,24 @@ This PR implements a comprehensive upgrade of the OpenRoute.AI application stack
   - `GET /api/places/by_type/?type=R` - Filter places by type
   - `GET /api/cities/by_country/?country_id=1` - Get cities by country
 
+- Paywall endpoints:
+  - `GET /api/paywall/tiers/` - List all subscription tiers
+  - `GET /api/paywall/subscription/` - Get user's current subscription
+  - `POST /api/paywall/subscribe/` - Subscribe to a tier
+  - `GET /api/paywall/usage/` - Get usage statistics
+  - `POST /api/paywall/create-checkout/` - Create Stripe checkout session
+
 ### Developer Experience
 - Coverage reporting script: `npm run test:coverage`
 - Linting scripts for both frontend and backend
 - Prettier formatting support
 - Pre-configured pytest with sensible defaults
+- Management command: `python manage.py init_medal_tiers` to setup tiers
 
 ## 📖 Documentation
 - ✅ Comprehensive **CHANGELOG.md** with migration guide
+- ✅ **PAYWALL_README.md** with complete paywall system documentation
+- ✅ **MEDAL_TIERS.md** with tier strategy and monetization guide
 - ✅ Updated **.gitignore** with modern exclusions
 - ✅ PR description template (this file)
 - ✅ Environment variable documentation in `.env.example`
@@ -121,6 +181,8 @@ cp .env.example .env
 
 # 2. Update .env with your settings
 # Edit SECRET_KEY, database credentials, etc.
+# For paywall: Set PAYWALL_ENABLED=True and add Stripe keys
+# For ads: Add GOOGLE_ADSENSE_CLIENT_ID and GOOGLE_ADSENSE_SLOT_ID
 
 # 3. Install backend dependencies
 pip install -r requirements.txt
@@ -131,10 +193,13 @@ cd frontend/openroute_ai && npm install
 # 5. Run migrations
 cd backend/openRoute_ai && python manage.py migrate
 
-# 6. Create logs directory
+# 6. Initialize medal tiers (if using paywall)
+python manage.py init_medal_tiers
+
+# 7. Create logs directory
 mkdir -p backend/openRoute_ai/logs
 
-# 7. Start development servers
+# 8. Start development servers
 # Option 1: Separate terminals
 python manage.py runserver
 npm start
@@ -202,6 +267,12 @@ gunicorn openRoute_ai.wsgi:application
 - `python-decouple==3.8` - Environment variable management
 - `drf-spectacular==0.27.2` - API documentation
 - `djangorestframework-simplejwt==5.3.1` - JWT authentication
+- `stripe==11.2.0` - Payment processing for subscriptions
+- `cryptography==44.0.0` - Enhanced security
+- `django-csp==3.8` - Content Security Policy
+- `django-security==0.18.0` - Additional security middleware
+- `django-redis==5.4.0` - Redis caching support
+- `redis==5.2.0` - Redis client
 - `pytest==8.3.3` - Testing framework
 - `pytest-django==4.9.0` - Django testing support
 - `pytest-cov==6.0.0` - Coverage reporting
@@ -214,7 +285,9 @@ gunicorn openRoute_ai.wsgi:application
 
 ### Frontend
 - `@reduxjs/toolkit==2.3.0` - Modern Redux
-- Updated all packages to latest stable versions
+- `@stripe/react-stripe-js==2.9.0` - Stripe React integration
+- `@stripe/stripe-js==4.9.0` - Stripe JavaScript SDK
+- Updated all packages to latest stable versions with exact pinning
 
 ## 🚀 Next Steps (Recommendations)
 
