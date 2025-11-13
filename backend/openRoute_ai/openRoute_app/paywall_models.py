@@ -1,28 +1,39 @@
 """
 Paywall and subscription models for OpenRoute.AI
-Supports tiered subscriptions and usage-based billing
+Supports medal-themed tiered subscriptions with route, model, and daily usage limits
 """
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, date
 from .models import CustomUser
 
 
 class SubscriptionTier(models.Model):
     """
-    Subscription tier/plan definition
-    Can be enabled/disabled via PAYWALL_ENABLED setting
+    Medal-themed subscription tier/plan definition
+    Limits: Saved routes, AI models, and daily uses
     """
     BILLING_PERIOD_CHOICES = [
+        ('free', 'Free'),
         ('monthly', 'Monthly'),
         ('yearly', 'Yearly'),
         ('lifetime', 'Lifetime'),
     ]
 
+    MEDAL_TIER_CHOICES = [
+        ('bronze', 'Bronze'),
+        ('silver', 'Silver'),
+        ('gold', 'Gold'),
+        ('platinum', 'Platinum'),
+        ('diamond', 'Diamond'),
+    ]
+
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
+    medal_tier = models.CharField(max_length=20, choices=MEDAL_TIER_CHOICES, default='bronze')
     description = models.TextField()
+    tagline = models.CharField(max_length=200, blank=True, help_text="Short marketing tagline")
 
     # Pricing
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
@@ -32,22 +43,47 @@ class SubscriptionTier(models.Model):
     stripe_price_id = models.CharField(max_length=255, blank=True, null=True)
     stripe_product_id = models.CharField(max_length=255, blank=True, null=True)
 
-    # Features and limits
-    max_places_per_month = models.IntegerField(
+    # Core Limits (null = unlimited)
+    max_saved_routes = models.IntegerField(
         null=True,
         blank=True,
-        help_text="Maximum places that can be created per month. Null = unlimited"
+        help_text="Maximum routes that can be saved. Null = unlimited"
     )
-    max_itineraries_per_month = models.IntegerField(
+    max_daily_uses = models.IntegerField(
         null=True,
         blank=True,
-        help_text="Maximum itineraries per month. Null = unlimited"
+        help_text="Maximum route optimizations per calendar day. Null = unlimited"
     )
-    max_ai_requests_per_month = models.IntegerField(
-        null=True,
-        blank=True,
-        help_text="Maximum AI-powered optimization requests per month. Null = unlimited"
+
+    # AI Model Access
+    MODEL_ACCESS_CHOICES = [
+        ('basic', 'Basic Models Only'),
+        ('standard', 'Standard Models'),
+        ('advanced', 'Advanced Models'),
+        ('all', 'All Models Including Premium'),
+    ]
+    allowed_models = models.CharField(
+        max_length=20,
+        choices=MODEL_ACCESS_CHOICES,
+        default='basic',
+        help_text="Which AI models this tier can access"
     )
+
+    # Ad Configuration
+    shows_ads = models.BooleanField(
+        default=True,
+        help_text="Whether ads are displayed for this tier"
+    )
+    ad_frequency = models.IntegerField(
+        default=3,
+        validators=[MinValueValidator(0)],
+        help_text="Show ad every N requests (0 = no ads, 1 = every request)"
+    )
+
+    # Legacy fields (kept for backward compatibility)
+    max_places_per_month = models.IntegerField(null=True, blank=True)
+    max_itineraries_per_month = models.IntegerField(null=True, blank=True)
+    max_ai_requests_per_month = models.IntegerField(null=True, blank=True)
 
     # Feature flags
     allows_export = models.BooleanField(default=False)
@@ -55,9 +91,14 @@ class SubscriptionTier(models.Model):
     allows_api_access = models.BooleanField(default=False)
     priority_support = models.BooleanField(default=False)
 
+    # Display settings
+    badge_color = models.CharField(max_length=7, default='#CD7F32', help_text="Hex color for tier badge")
+    icon_emoji = models.CharField(max_length=10, default='🥉', help_text="Emoji icon for tier")
+
     # Metadata
     is_active = models.BooleanField(default=True)
     is_default = models.BooleanField(default=False)
+    is_popular = models.BooleanField(default=False, help_text="Mark as 'Most Popular'")
     sort_order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -68,7 +109,9 @@ class SubscriptionTier(models.Model):
         verbose_name_plural = 'Subscription Tiers'
 
     def __str__(self):
-        return f"{self.name} (${self.price}/{self.billing_period})"
+        if self.billing_period == 'free':
+            return f"{self.icon_emoji} {self.name} (Free)"
+        return f"{self.icon_emoji} {self.name} (${self.price}/{self.billing_period})"
 
     def save(self, *args, **kwargs):
         # Ensure only one default tier
@@ -161,13 +204,18 @@ class UserSubscription(models.Model):
 class UsageTracking(models.Model):
     """
     Track user resource usage for billing and limits
+    Enhanced for daily tracking
     """
     RESOURCE_TYPES = [
+        ('route_optimization', 'Route Optimization'),
+        ('route_saved', 'Route Saved'),
+        ('model_use', 'AI Model Use'),
         ('place', 'Place Created'),
         ('itinerary', 'Itinerary Created'),
         ('ai_request', 'AI Optimization Request'),
         ('api_call', 'API Call'),
         ('export', 'Data Export'),
+        ('ad_view', 'Ad Viewed'),
     ]
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='usage_records')
@@ -182,6 +230,9 @@ class UsageTracking(models.Model):
     billing_period_start = models.DateField()
     billing_period_end = models.DateField()
 
+    # Daily tracking
+    usage_date = models.DateField(default=date.today)
+
     # Metadata
     metadata = models.JSONField(default=dict, blank=True)
 
@@ -189,6 +240,7 @@ class UsageTracking(models.Model):
         verbose_name = 'Usage Tracking'
         verbose_name_plural = 'Usage Tracking'
         indexes = [
+            models.Index(fields=['user', 'resource_type', 'usage_date']),
             models.Index(fields=['user', 'resource_type', 'billing_period_start']),
             models.Index(fields=['timestamp']),
         ]
@@ -214,6 +266,7 @@ class UsageTracking(models.Model):
     def track_usage(user, resource_type, resource_id=None, quantity=1, metadata=None):
         """Track a usage event"""
         start, end = UsageTracking.get_current_billing_period()
+        today = date.today()
 
         return UsageTracking.objects.create(
             user=user,
@@ -222,6 +275,7 @@ class UsageTracking(models.Model):
             quantity=quantity,
             billing_period_start=start,
             billing_period_end=end,
+            usage_date=today,
             metadata=metadata or {}
         )
 
@@ -237,6 +291,27 @@ class UsageTracking(models.Model):
             billing_period_start=period_start,
             billing_period_end=period_end
         ).aggregate(total=models.Sum('quantity'))['total'] or 0
+
+    @staticmethod
+    def get_daily_usage_count(user, resource_type, usage_date=None):
+        """Get usage count for a specific day"""
+        if not usage_date:
+            usage_date = date.today()
+
+        return UsageTracking.objects.filter(
+            user=user,
+            resource_type=resource_type,
+            usage_date=usage_date
+        ).aggregate(total=models.Sum('quantity'))['total'] or 0
+
+    @staticmethod
+    def get_saved_routes_count(user):
+        """Get current count of saved routes"""
+        return UsageTracking.objects.filter(
+            user=user,
+            resource_type='route_saved',
+            metadata__is_deleted=False
+        ).count()
 
 
 class PaymentHistory(models.Model):
@@ -306,3 +381,36 @@ class FeatureFlag(models.Model):
             return flag.is_enabled
         except FeatureFlag.DoesNotExist:
             return False
+
+
+class AdImpression(models.Model):
+    """
+    Track ad impressions and clicks for analytics
+    """
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ad_impressions', null=True, blank=True)
+    ad_provider = models.CharField(max_length=50, default='google_adsense')
+    ad_unit_id = models.CharField(max_length=100, blank=True)
+
+    # Impression details
+    impression_id = models.CharField(max_length=255, unique=True)
+    was_clicked = models.BooleanField(default=False)
+    clicked_at = models.DateTimeField(null=True, blank=True)
+
+    # Context
+    page_url = models.CharField(max_length=500)
+    user_tier = models.CharField(max_length=20, blank=True)
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Ad Impression'
+        verbose_name_plural = 'Ad Impressions'
+        indexes = [
+            models.Index(fields=['user', 'created_at']),
+            models.Index(fields=['ad_provider', 'created_at']),
+        ]
+
+    def __str__(self):
+        user_str = self.user.username if self.user else 'Anonymous'
+        return f"{user_str} - {self.ad_provider} - {self.created_at}"

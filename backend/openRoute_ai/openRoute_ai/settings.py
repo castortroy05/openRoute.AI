@@ -277,6 +277,10 @@ STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
 FRONTEND_URL = config('FRONTEND_URL', default='http://localhost:3000')
 
+# Ad Configuration (for lower subscription tiers)
+AD_PROVIDER = config('AD_PROVIDER', default='google_adsense')
+GOOGLE_ADSENSE_CLIENT_ID = config('GOOGLE_ADSENSE_CLIENT_ID', default='')
+GOOGLE_ADSENSE_SLOT_ID = config('GOOGLE_ADSENSE_SLOT_ID', default='')
 
 # Redis Configuration (for caching and performance)
 REDIS_HOST = config('REDIS_HOST', default='localhost')
