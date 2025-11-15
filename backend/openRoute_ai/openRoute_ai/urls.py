@@ -18,6 +18,12 @@ from openRoute_app.paywall_views import (
     UsageTrackingViewSet, PaymentHistoryViewSet, FeatureFlagViewSet
 )
 
+# Routing and mapping views
+from openRoute_app.routing_views import (
+    calculate_route, optimize_itinerary_route,
+    get_accessibility_nearby, enrich_place_accessibility
+)
+
 router = DefaultRouter()
 
 # Main API routes
@@ -44,6 +50,12 @@ urlpatterns = [
     # API endpoints
     path('api/', include(router.urls)),
     path('api/register/', RegisterView.as_view(), name='register'),
+
+    # Routing and Mapping endpoints
+    path('api/routing/calculate/', calculate_route, name='calculate-route'),
+    path('api/routing/optimize-itinerary/', optimize_itinerary_route, name='optimize-itinerary'),
+    path('api/accessibility/nearby/', get_accessibility_nearby, name='accessibility-nearby'),
+    path('api/accessibility/enrich-place/', enrich_place_accessibility, name='enrich-place'),
 
     # API Documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

@@ -282,6 +282,12 @@ AD_PROVIDER = config('AD_PROVIDER', default='google_adsense')
 GOOGLE_ADSENSE_CLIENT_ID = config('GOOGLE_ADSENSE_CLIENT_ID', default='')
 GOOGLE_ADSENSE_SLOT_ID = config('GOOGLE_ADSENSE_SLOT_ID', default='')
 
+# Mapping and Routing Configuration
+# OpenRouteService API for route optimization and navigation
+OPENROUTESERVICE_API_KEY = config('OPENROUTESERVICE_API_KEY', default='')
+# Overpass API for OpenStreetMap accessibility data
+OVERPASS_API_URL = config('OVERPASS_API_URL', default='https://overpass-api.de/api/interpreter')
+
 # Redis Configuration (for caching and performance)
 REDIS_HOST = config('REDIS_HOST', default='localhost')
 REDIS_PORT = config('REDIS_PORT', default=6379, cast=int)

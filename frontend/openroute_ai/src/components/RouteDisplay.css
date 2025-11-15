@@ -1,0 +1,198 @@
+.route-display {
+  margin: 20px 0;
+}
+
+.selected-places ol {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.route-preferences {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.route-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.route-instructions {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.instructions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.instruction-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #007bff;
+  font-size: 0.9rem;
+}
+
+.instruction-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.instruction-text {
+  flex: 1;
+  color: #495057;
+}
+
+.instruction-distance {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.route-tips {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .route-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-value {
+    font-size: 1.1rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .route-preferences {
+    background-color: #343a40;
+    border-left-color: #0d6efd;
+  }
+
+  .stat-card {
+    background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+    border-color: #495057;
+  }
+
+  .stat-label {
+    color: #adb5bd;
+  }
+
+  .stat-value {
+    color: #f8f9fa;
+  }
+
+  .route-instructions {
+    background-color: #343a40;
+  }
+
+  .instruction-item {
+    background-color: #495057;
+    border-left-color: #0d6efd;
+  }
+
+  .instruction-text {
+    color: #e9ecef;
+  }
+
+  .instruction-distance {
+    color: #adb5bd;
+  }
+
+  .route-tips {
+    background-color: #665d03;
+    border-left-color: #ffc107;
+    color: #fff3cd;
+  }
+}
+
+/* Custom scrollbar for instructions */
+.route-instructions::-webkit-scrollbar {
+  width: 8px;
+}
+
+.route-instructions::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.route-instructions::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.route-instructions::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

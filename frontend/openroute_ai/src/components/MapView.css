@@ -1,0 +1,145 @@
+.map-view-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+.map-popup h6 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.map-popup p {
+  margin: 4px 0;
+}
+
+.accessibility-badge {
+  margin: 8px 0;
+}
+
+.accessibility-badge .badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+}
+
+.accessibility-info {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 3px solid #28a745;
+}
+
+.accessibility-info strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #495057;
+}
+
+/* Map Legend */
+.map-legend {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: 200px;
+}
+
+.map-legend strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.legend-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .map-legend {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .legend-items {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    flex: 0 0 calc(50% - 4px);
+  }
+}
+
+/* Leaflet popup customizations */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+  font-size: 0.9rem;
+}
+
+.leaflet-popup-tip-container {
+  display: none;
+}
+
+/* Route line styling */
+.leaflet-interactive {
+  cursor: pointer;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .map-popup h6 {
+    color: #f8f9fa;
+  }
+
+  .accessibility-info {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+
+  .map-legend {
+    background: #2c3135;
+    color: #f8f9fa;
+  }
+
+  .map-legend strong {
+    color: #dee2e6;
+  }
+}
